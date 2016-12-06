@@ -22,7 +22,7 @@ public class Fck18ClassTransformer implements IClassTransformer, Opcodes {
             classReader.accept(node, 0);
 
             for (MethodNode methodNode : node.methods) {
-                if (methodNode.name.equals("a") && methodNode.desc.equals("(Lpr;)Z")) {
+                if (methodNode.name.equals(methodName) && methodNode.desc.equals(methodDesc)) {
                     /* clear the original instructions */
                     methodNode.instructions.clear(); // clear the instructions
                     /*
