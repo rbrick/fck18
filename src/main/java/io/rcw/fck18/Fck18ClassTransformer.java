@@ -7,13 +7,17 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Fck18ClassTransformer implements IClassTransformer, Opcodes {
+
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
         boolean obfuscated = !name.equals(transformedName);
 
         // Using mappings stable_20/stable_22
-        String methodDesc = obfuscated ? "(Lpr;)Z" : "(Lnet/minecraft/client/renderer/entity/RendererLivingEntity;)Z";
+        String methodDesc = obfuscated ? "(Lpr;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z";
         String methodName = obfuscated ? "a" : "canRenderName";
 
         if (transformedName.equals("net.minecraft.client.renderer.entity.RendererLivingEntity")) {
@@ -32,7 +36,7 @@ public class Fck18ClassTransformer implements IClassTransformer, Opcodes {
                     methodNode.visitCode();
                     {
                         methodNode.visitVarInsn(ALOAD, 1);  // Load the entity reference from the stack
-                        methodNode.visitMethodInsn(INVOKESTATIC, "io/rcw/fck18/Hooks", "canRenderName", "(Lpr;)Z", false); // Hooks.canRenderName()
+                        methodNode.visitMethodInsn(INVOKESTATIC, "io/rcw/fck18/Hooks", "canRenderName", methodDesc, false); // Hooks.canRenderName()
                         methodNode.visitInsn(IRETURN); // return Hooks.canRenderName(entity);
                         methodNode.visitMaxs(1, 1);
                     }
