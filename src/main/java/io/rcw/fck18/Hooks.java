@@ -12,14 +12,6 @@ public final class Hooks {
         EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
         boolean flag = !entity.isInvisibleToPlayer(entityplayersp);
 
-        System.out.println("TEST");
-        System.out.println("TEST");
-        System.out.println("TEST");
-        System.out.println("TEST");
-        System.out.println("TEST");
-        System.out.println("TEST");
-        System.out.println("TEST");
-
         if (entity instanceof EntityPlayer && entity != entityplayersp) {
             Team team = entity.getTeam();
             Team team1 = entityplayersp.getTeam();
